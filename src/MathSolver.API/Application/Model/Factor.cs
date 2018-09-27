@@ -14,7 +14,7 @@ namespace MathSolver.API.Application.Model
         }
         public double Solve()
         {
-            return 10.0;
+            return Calculus.Split("+").Select(s => int.Parse(s)).Sum();
         }
     }
 }
