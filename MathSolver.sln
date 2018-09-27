@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2019
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathSolver.API", "src\MathSolver.API\MathSolver.API.csproj", "{F9E7F85D-C376-4097-9E66-9228BDF12F1A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathSolver.UnitTest", "test\MathSolver.UnitTest\MathSolver.UnitTest.csproj", "{230097D9-2A46-4A0A-A937-72C2CA419E2C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathSolver.FunctionalTest", "test\MathSolver.FunctionalTest.cs\MathSolver.FunctionalTest.csproj", "{AF4EAA70-1350-4935-A171-BF77BD07FF1D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{EA5022A2-3EDB-4B75-B1E7-BB53FFBA527A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9E7F85D-C376-4097-9E66-9228BDF12F1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9E7F85D-C376-4097-9E66-9228BDF12F1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9E7F85D-C376-4097-9E66-9228BDF12F1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9E7F85D-C376-4097-9E66-9228BDF12F1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{230097D9-2A46-4A0A-A937-72C2CA419E2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{230097D9-2A46-4A0A-A937-72C2CA419E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{230097D9-2A46-4A0A-A937-72C2CA419E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{230097D9-2A46-4A0A-A937-72C2CA419E2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF4EAA70-1350-4935-A171-BF77BD07FF1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF4EAA70-1350-4935-A171-BF77BD07FF1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF4EAA70-1350-4935-A171-BF77BD07FF1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF4EAA70-1350-4935-A171-BF77BD07FF1D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{230097D9-2A46-4A0A-A937-72C2CA419E2C} = {EA5022A2-3EDB-4B75-B1E7-BB53FFBA527A}
+		{AF4EAA70-1350-4935-A171-BF77BD07FF1D} = {EA5022A2-3EDB-4B75-B1E7-BB53FFBA527A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {13E12D89-D2F8-46FC-83EE-96A919ECED72}
+	EndGlobalSection
+EndGlobal
