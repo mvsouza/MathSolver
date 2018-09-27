@@ -14,7 +14,11 @@ namespace MathSolver.API.Application.Model
         }
         public double Solve()
         {
-            return Calculus.Split("+").Select(s => int.Parse(s)).Sum();
+            if(Calculus.Contains("+"))
+                return Calculus.Split("+").Select(s => int.Parse(s)).Sum();
+            if (Calculus.Contains("*"))
+                return Calculus.Split("*").Select(s => int.Parse(s)).Aggregate(1, (acc, x) => acc * x);
+            throw new NotImplementedException();
         }
     }
 }
