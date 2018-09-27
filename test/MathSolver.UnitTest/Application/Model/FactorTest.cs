@@ -26,5 +26,15 @@ namespace MathSolver.UnitTest.Application.Model
             var factor = new Factor(calculus);
             Assert.Equal(result, factor.Solve());
         }
+
+        [Theory]
+        [InlineData("5*5+1", 26.0)]
+        [InlineData("5*1+3", 8.0)]
+        [InlineData("3+5*1*2", 13.0)]
+        public void MutiplicationAndAdditionOfNumbers(string calculus, double result)
+        {
+            var factor = new Factor(calculus);
+            Assert.Equal(result, factor.Solve());
+        }
     }
 }

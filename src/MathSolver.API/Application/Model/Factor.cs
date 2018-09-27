@@ -15,10 +15,10 @@ namespace MathSolver.API.Application.Model
         public double Solve()
         {
             if(Calculus.Contains("+"))
-                return Calculus.Split("+").Select(s => int.Parse(s)).Sum();
+                return Calculus.Split("+").Select(s => new Factor(s).Solve()).Sum();
             if (Calculus.Contains("*"))
-                return Calculus.Split("*").Select(s => int.Parse(s)).Aggregate(1, (acc, x) => acc * x);
-            throw new NotImplementedException();
+                return Calculus.Split("*").Select(s => new Factor(s).Solve()).Aggregate(1.0, (acc, x) => acc * x);
+            return int.Parse(Calculus);
         }
     }
 }
