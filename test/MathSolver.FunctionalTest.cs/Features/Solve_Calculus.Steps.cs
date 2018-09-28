@@ -34,8 +34,8 @@ namespace MathSolver.FunctionalTest.Features
         private async void When_I_request_a_calculus_to_be_solved()
         {
 
-            string json_requestEncouter = JsonConvert.SerializeObject($"{_calculus}");
-            var content = new StringContent(json_requestEncouter, Encoding.UTF8, "application/json");
+            string jsonCalculus = JsonConvert.SerializeObject($"{_calculus}");
+            var content = new StringContent(jsonCalculus, Encoding.UTF8, "application/json");
             var scenarioBase = new MathSolverScenarioBase();
             _response = await scenarioBase.CreateServer().CreateClient()
                 .PostAsync(Post.Solve(), content);

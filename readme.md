@@ -19,6 +19,6 @@ In order to validate its result
 ## Acceptence criteria
 
 - The fatorial calculus should accept add and mutiple operation;
-- Mutiplication shoul precede addition;
+- Mutiplication should precede addition;
 - Be able to reinforce precedence by using parentheses;
 - All open parentheses should have other to close;
