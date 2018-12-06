@@ -19,42 +19,37 @@ namespace MathSolver.API.Application.Model
                 return _factors;
             }
         }
-        public (char desc, double seed, Func<double, double, double> func) Operation { get; private set; }
+        public Operator Operation { get => Operator.Precedent(HigherOperations.Select(o => o.desc)); }
         
-        private List<(char desc, int index)> _higherOperations;
-        public List<(char desc, int index)> HigherOperations
+        private List<(string desc, int index)> _higherOperations;
+        public List<(string desc, int index)> HigherOperations
         {
             get
             {
                 if (_higherOperations != null)
                     return _higherOperations;
                 Queue<int> parentesesQueue = new Queue<int>();
-                List<(char desc, int index)> operations = new List<(char desc, int index)>();
-                var numberIndex = 0;
+                List<(string desc, int index)> operations = new List<(string desc, int index)>();
                 for (int index = 0; index < Calculus.Length; index++)
                 {
                     switch (Calculus[index])
                     {
                         case '(':
                             parentesesQueue.Enqueue(index);
-                            numberIndex = index + 1;
                             break;
                         case ')':
                             var startParenteses = parentesesQueue.Dequeue();
-                            numberIndex = index + 1;
                             break;
                         case ('*'):
                             if (parentesesQueue.Count == 0)
                             {
-                                operations.Add(('*', index));
-                                numberIndex = index + 1;
+                                operations.Add(("*", index));
                             }
                             break;
                         case ('+'):
                             if (parentesesQueue.Count == 0)
                             {
-                                operations.Add(('+', index));
-                                numberIndex = index + 1;
+                                operations.Add(("+", index));
                             }
                             break;
                     }
@@ -63,7 +58,7 @@ namespace MathSolver.API.Application.Model
                 return operations;
             }
         }
-        public bool HasOperator => HigherOperations.Any();
+        public bool IsComposedFactor => HigherOperations.Any();
         
         public Factor(string calculus)
         {
@@ -73,15 +68,14 @@ namespace MathSolver.API.Application.Model
         private IEnumerable<Factor> BreakIntoFactors()
         {
             List<Factor> factors = new List<Factor>();
-            if (HasOperator)
+            if (IsComposedFactor)
             {
-                Operation = Precedence.First(p => HigherOperations.Any(o => o.desc.Equals(p.desc)));
                 var factorStart = 0;
                 
 
                 for (int index = 0; index < HigherOperations.Count; index++)
                 {
-                    if (HigherOperations[index].desc != Operation.desc)
+                    if (HigherOperations[index].desc != Operation.Description)
                         continue;
                     factors.Add(new Factor(Calculus.Substring(factorStart, (HigherOperations[index].index - factorStart))));
                     factorStart = HigherOperations[index].index + 1;
@@ -92,27 +86,24 @@ namespace MathSolver.API.Application.Model
             return factors;
         }
         
-
-        public static IEnumerable<(char desc, double seed, Func<double, double, double> func)> Precedence = new (char desc, double seed, Func<double, double, double> func)[] {
-            ('+',0,(acc, x) => acc + x),
-            ('*',1,(acc, x) => acc * x)
-        };
+        
         public double Solve()
         {
-            if (HasOperator)
-                return Factors.Select(f => f.Solve()).Aggregate(Operation.seed, Operation.func);
-            if (Calculus[0] == '(' && Calculus[Calculus.Length-1] == ')')
-            {
-                Calculus = Calculus.Substring(1, Calculus.Length - 2);
-            }
+            if (IsComposedFactor)
+                return this.Operation.Solve(Factors);
             double value;
-            if (double.TryParse(Calculus, out value)){
+            if (double.TryParse(Calculus, out value))
+            {
                 return value;
             }
-            return new Factor(Calculus).Solve();
-
-
+            return new Factor(ExtractCalculusBetweenPatenthesis()).Solve();
         }
 
+        private string ExtractCalculusBetweenPatenthesis()
+        {
+            return !IsComposedFactor && Calculus[0] == '(' && Calculus[Calculus.Length - 1] == ')'?
+                Calculus.Substring(1, Calculus.Length - 2)
+                : Calculus;
+        }
     }
 }

@@ -14,8 +14,8 @@ I want to request its solution.")]
     [Label("Story-1")]
     public partial class Solve_Calculus
     {
-        [Scenario]
-        [MultiAssert]
+        //[Scenario]
+        //[MultiAssert]
         public async void Solve_a_add()
         {
             await Runner.RunScenarioActionsAsync(
