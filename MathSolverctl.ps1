@@ -26,7 +26,7 @@ process {
     }
     if($action -eq "openCover" -or $action -eq "sonarqubeLocalBuild" ){
         $dotnet = "C:\Program Files\dotnet\dotnet.exe";
-        $opencoverFilter = "+[*]* -[*UnitTest]*";
+        $opencoverFilter = "+[MathSolver*]* -[*UnitTest]*";
         $target = "test --logger:trx;LogFileName=$outputDir\results.trx $($unitTestProj.FullName)";
         OpenCover.Console.exe -register:user -target:"$dotnet" -targetargs:"$target" -filter:"$opencoverFilter" -oldStyle -output:"$opencoverFile";
     }

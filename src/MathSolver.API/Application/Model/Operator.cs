@@ -8,17 +8,17 @@ namespace MathSolver.API.Application.Model
     public class Operator
     {
         public static IEnumerable<Operator> Precedence = new List<Operator> {
-            new Operator("+",0,(acc, x) => acc + x),
-            new Operator("*",1,(acc, x) => acc * x)
+            new Operator('+',0,(acc, x) => acc + x),
+            new Operator('*',1,(acc, x) => acc * x)
         };
-        public string Description { get; }
+        public char Simbol { get; }
         public double AggregationBase { get; }
         public Func<double,double,double> SolveAggregator { get; }
 
-        public Operator(string description, double aggregationBase, Func<double, double, double> solveAggregator)
+        public Operator(char simbol, double aggregationBase, Func<double, double, double> solveAggregator)
         {
             AggregationBase = aggregationBase;
-            Description = description;
+            Simbol = simbol;
             SolveAggregator = solveAggregator;
         }
 
@@ -26,10 +26,16 @@ namespace MathSolver.API.Application.Model
         {
             return factors.Select(f => f.Solve()).Aggregate(AggregationBase, SolveAggregator);
         }
-
-        public static Operator Precedent(IEnumerable<string> operations)
+        
+        public static Operator Precedent(IEnumerable<char> operations)
         {
-            return Precedence.First(o => operations.Any(desc => desc.Equals(o.Description)));
+            return Precedence.First(o => operations.Any(desc => desc.Equals(o.Simbol)));
+        }
+
+        public static bool TryFindOperator(char simbol, out Operator reference)
+        {
+            reference = Precedence.FirstOrDefault(o=> o.Simbol==simbol);
+            return reference != null;
         }
     }
 }
